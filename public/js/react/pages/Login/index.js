@@ -1,52 +1,45 @@
 import React from 'react';
-import Redux from 'redux';
 import Component from './../../common/Component';
-import Input from './../../components/Input';
-import Store from './../../common/Store';
+import { Form, Icon, Input, Button } from 'antd';
+import styles from './Login.less';
 
+const FormItem = Form.Item;
 
+function hasErrors(fieldsError) {
+    return Object.keys(fieldsError).some(field => fieldsError[field]);
+  }
+
+@Form.create()
 export default class Login extends Component {
     constructor() {
         super();
-        this.state = {
-            username:'',
-            password:''
-        }
     }
 
-    _onFormSubmit(event) {
-        event.preventDefault();
-        Store.subscribe(this.submitCallback.bind(this));
-        Store.dispatch({type:'LOGIN'});
-        
+    handleSubmit(e) {
+        e.preventDefault();
+        this.props.form.validateFields((err, values) => {
+            if (!err) {
+            console.log('Received values of form: ', values);
+            }
+        });
     }
-
-    submitCallback() {
-        let returnData = Store.getState();
-        this.setState(returnData.reduce);
-        console.log(returnData);
-    }
-
-    _handleInputChange(event) {
-        const stateValue = Object.assign({}, this.state);
-        stateValue[event.target.name] = event.target.value;
-        this.setState(stateValue);
-    }
-
-    
-
     render() {
+        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
         return (
-            <div>
-                {this.state.message}
-                <form onSubmit={this._onFormSubmit.bind(this)}>
-                    <label htmlFor="username">username</label>
-                    <input type="text" name="username" onChange={this._handleInputChange.bind(this)}/>
-                    <label htmlFor="password">password</label>
-                    <input type="password" name="password" onChange={this._handleInputChange.bind(this)}/>
-                    <input type="submit"/>
-                </form>
-            </div>
+            <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
+                <FormItem>
+                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username"/>
+                </FormItem>
+
+                <FormItem>
+                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
+                </FormItem>
+                <FormItem>
+                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} >
+                        Log in
+                    </Button>
+                </FormItem>
+            </Form>
         );
     }
 }

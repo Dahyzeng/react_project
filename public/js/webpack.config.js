@@ -10,7 +10,16 @@ module.exports = {
   module: {
     loaders: [{
       test: /\.jsx?$/,
-      loaders: ['babel-loader?presets[]=es2015,presets[]=react']
-    }]
+      loaders: 'babel-loader',
+      query: {
+        presets: ['es2015','react','stage-1'],
+        plugins: ['transform-decorators-legacy','transform-decorators']
+      }
+    },
+    {
+      test: /\.(less|css)$/,
+      use:[ 'style-loader','css-loader','less-loader'],
+    },
+  ]
   }
 }
