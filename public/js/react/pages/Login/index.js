@@ -1,45 +1,16 @@
-import React from 'react';
-import Component from './../../common/Component';
-import { Form, Icon, Input, Button } from 'antd';
-import styles from './Login.less';
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import Login from './../../components/Login';
+import login from './../../model/login';
 
-const FormItem = Form.Item;
+const store = createStore(login);
 
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-  }
-
-@Form.create()
-export default class Login extends Component {
-    constructor() {
-        super();
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                
-            }
-        });
-    }
-    render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-        return (
-            <Form layout="inline" onSubmit={this.handleSubmit.bind(this)}>
-                <FormItem>
-                    <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username"/>
-                </FormItem>
-
-                <FormItem>
-                    <Input prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />} type="password" placeholder="Password"/>
-                </FormItem>
-                <FormItem>
-                    <Button type="primary" htmlType="submit" disabled={hasErrors(getFieldsError())} >
-                        Log in
-                    </Button>
-                </FormItem>
-            </Form>
-        );
-    }
-}
+let rootElement = document.getElementById('root');
+render(
+    <Provider store={store}>
+        <Login />
+    </Provider>,
+    rootElement
+);
