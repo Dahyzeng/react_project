@@ -3,12 +3,7 @@ let UserModel = require('./../model/userModel');
 class UserRepository{
     constructor(){};
 
-    saveUser() {
-        const person = {
-            name : 'dahy',
-            email : '11@qq.com',
-            password : 'xxxxx'
-        };
+    saveUser(person){
         UserModel.create(person, function(err){
             console.log('save success');
         });

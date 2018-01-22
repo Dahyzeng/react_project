@@ -22,9 +22,6 @@ export default class Login extends React.Component{
         const profile = this.props.profile;
         return (
             <div>
-                {
-                    console.log(profile.isOk)
-                }
                 <form onSubmit={ this.handleSubmit.bind(this) }>
                     <label htmlFor="email">email:</label>
                     <input name="email" />

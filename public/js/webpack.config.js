@@ -1,8 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
-var BUILD_PATH = path.resolve(__dirname, './build');
+var BUILD_PATH = path.resolve(__dirname, './../../server/public');
 module.exports = {
-  entry: './react/pages/Login/index.js',
+  entry: './react/pages/index.js',
   output: {
     path: BUILD_PATH,
     filename: 'bundle.js'
