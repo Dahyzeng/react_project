@@ -1,3 +1,5 @@
 /public/js/node_modules
 /server/node_modules
 /public/js/react/node_modules
+/.idea
+/public/js/build
