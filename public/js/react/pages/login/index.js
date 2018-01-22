@@ -2,15 +2,17 @@ import React from 'react';
 import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import Login from './../../components/Login';
-import loginStore from './../../store/loginStore';
+import store from './../../common/store';
 import loginSaga from './../../saga/loginSaga';
+import loginReducer from './../../reducer/login';
 
-const store = loginStore();
-store.runSage(loginSaga);
+const loginStore = store(loginReducer);
+loginStore.runSage(loginSaga);
+
 let rootElement = document.getElementById('root');
 if (rootElement) {
     render(
-        <Provider store={store}>
+        <Provider store={loginStore}>
             <Login />
         </Provider>,
         rootElement
