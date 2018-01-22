@@ -1,17 +1,23 @@
-let config = require('./config');
+
 let UserModel = require('./../model/userModel');
 class UserRepository{
     constructor(){};
 
-    saveUser(person) {
+    saveUser() {
+        const person = {
+            name : 'dahy',
+            email : '11@qq.com',
+            password : 'xxxxx'
+        };
         UserModel.create(person, function(err){
             console.log('save success');
         });
     }
 
     login(username) {
-        UserModel.findByName(username, function(err, docs) {
+        UserModel.find(username, function(err, docs) {
             console.log(docs);
+            return docs;
         });
     }
 }

@@ -1,12 +1,17 @@
-import React from 'react'
+import React from 'react';
 import { render } from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import Login from './../../components/Login';
-import login from './../../model/login';
+import { createStore, applyMiddleware} from 'redux';
+import createSagaMiddleware from 'redux-saga';
+import loginReducer from './../../model/login';
+import loginSaga from './../../saga/loginSaga';
 
-const store = createStore(login);
+const sagaMiddleware = createSagaMiddleware();
+const middlewares = [sagaMiddleware];
 
+const store = createStore(loginReducer, applyMiddleware(...middlewares));
+sagaMiddleware.run(loginSaga);
 let rootElement = document.getElementById('root');
 render(
     <Provider store={store}>

@@ -1,5 +1,4 @@
-import fetch from 'dva/fetch';
-import { notification } from 'antd';
+import fetch from 'isomorphic-fetch'
 
 const codeMessage = {
   200: '服务器成功返回请求的数据',
