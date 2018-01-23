@@ -34,30 +34,48 @@ export default class Register extends React.Component{
     render() {
         const profile = this.props.profile;
         return (
-            <div>
-                <form onSubmit={ this.handleSubmit.bind(this) }>
-                    <div>
-                        <label htmlFor="email">email:</label>
-                        <input name="email" onChange={this.onInputChange.bind(this, 'email')}/>
+            <div className="row main">
+                <div className="text-center" style={{ paddingBottom: '20px' }}>
+                    <h3>
+                        React Redux 简单实例
+                    </h3>
+                </div>
+                <form className="form-horizontal" onSubmit={ this.handleSubmit.bind(this) }>
+                    <div className="form-group">
+                        <label htmlFor="email" className="col-sm-5 control-label">邮箱:</label>
+                        <div className="col-sm-3">
+                            <input name="email" className="form-control" onChange={this.onInputChange.bind(this, 'email')}/>
+                        </div>
                     </div>
 
-                    <div>
-                        <label htmlFor="name">name:</label>
-                        <input name="name" onChange={this.onInputChange.bind(this, 'name')}/>
+                    <div className="form-group">
+                        <label htmlFor="name" className="col-sm-5 control-label">姓名:</label>
+                        <div className="col-sm-3">
+                            <input name="name" className="form-control" onChange={this.onInputChange.bind(this, 'name')}/>
+                        </div>
                     </div>
 
-                    <div>
-                        <label htmlFor="password">password:</label>
-                        <input name="password" type="password" onChange={this.onInputChange.bind(this, 'password')}/>
+                    <div className="form-group">
+                        <label htmlFor="password" className="col-sm-5 control-label">密码:</label>
+                        <div className="col-sm-3">
+                            <input name="password" className="form-control" type="password" onChange={this.onInputChange.bind(this, 'password')}/>
+                        </div>
                     </div>
 
-                    <div>
-                        <input type="submit" value="OK"/>
+                    <div className="form-group">
+                        <div className="col-sm-offset-5 col-sm-10">
+                            <input type="submit" className="btn btn-default" value="OK"/>
+                        </div>
                     </div>
                 </form>
-                <div>
-                    注册信息：邮箱：{profile.email}, 姓名：{ profile.name }，密码：{ profile.password }
-                </div>
+                {
+                    profile.email ? 
+                    <div className="text-center">
+                        注册信息：邮箱：{profile.email}, 姓名：{ profile.name }，密码：{ profile.password }
+                    </div>
+                        : null
+                }
+
             </div>
         )
     }
