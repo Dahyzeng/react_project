@@ -8,7 +8,7 @@ function* callRegister (action) {
     if (response.success) {
         yield put({
             type: 'view',
-            payload: action.payload
+            payload: { ...action.payload, isOk: true}
         })
     }
 

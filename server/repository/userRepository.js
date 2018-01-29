@@ -3,14 +3,14 @@ let UserModel = require('./../model/userModel');
 class UserRepository{
     constructor(){};
 
-    saveUser(person){
+    saveUser(person, callback){
         UserModel.create(person, function(err){
             console.log('save success');
         });
     }
 
-    login(username) {
-        UserModel.find(username, function(err, docs) {
+    login(email, callback) {
+        UserModel.find({email: email}, function(err, docs) {
             console.log(docs);
             return docs;
         });

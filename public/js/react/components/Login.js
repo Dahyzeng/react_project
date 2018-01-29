@@ -8,14 +8,26 @@ export default class Login extends React.Component{
 
     constructor(props) {
         super(props);
+        this.state = {
+            profile: {
+                email: '',
+                password: ''
+            }
+        }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.dispatch({
             type:'doLogin',
-            payload: ''
+            payload: this.state.profile
         });
+    };
+
+    onInputChange = (key, e) => {
+        const tmp = {profile: this.state.profile};
+        tmp.profile[key] = e.target.value;
+        this.setState(tmp);
     };
 
     render() {
@@ -31,14 +43,14 @@ export default class Login extends React.Component{
                     <div className="form-group">
                         <label htmlFor="email" className="col-sm-5 control-label">邮箱:</label>
                         <div className="col-sm-3">
-                            <input name="email" className="form-control"/>
+                            <input name="email" className="form-control" onChange={this.onInputChange.bind(this, 'email')}/>
                         </div>
                     </div>
 
                     <div className="form-group">
                         <label htmlFor="password" className="col-sm-5 control-label">密码:</label>
                         <div className="col-sm-3">
-                            <input name="password" type="password" className="form-control"/>
+                            <input name="password" type="password" className="form-control" onChange={this.onInputChange.bind(this, 'password')}/>
                         </div>
                     </div>
                     <div className="form-group">

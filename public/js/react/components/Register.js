@@ -69,7 +69,7 @@ export default class Register extends React.Component{
                     </div>
                 </form>
                 {
-                    profile.email ? 
+                    profile.isOk ?
                     <div className="text-center">
                         注册信息：邮箱：{profile.email}, 姓名：{ profile.name }，密码：{ profile.password }
                     </div>
